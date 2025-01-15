@@ -1,0 +1,27 @@
+﻿<Window x:Class="SnakeGameOnline.GameCreationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SnakeGameOnline"
+        mc:Ignorable="d"
+        Title="GameCreationWindow" Height="450" Width="400">
+    <Grid>
+        <Button x:Name="CreateButton" Content="Create" HorizontalAlignment="Left" Margin="104,338,0,0" VerticalAlignment="Top" Click="CreateButton_Click"/>
+        <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="257,338,0,0" VerticalAlignment="Top" Click="CancelButton_Click"/>
+        <TextBox x:Name="FieldWidthTextBox" HorizontalAlignment="Left" Margin="159,99,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="FieldHeightTextBox" HorizontalAlignment="Left" Margin="159,155,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="FoodStaticTextBox" HorizontalAlignment="Left" Margin="159,217,0,0" TextWrapping="Wrap" Text="2" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="StateDelayTextBox" HorizontalAlignment="Left" Margin="159,274,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="___Без_имени_" Content="Width" HorizontalAlignment="Left" Margin="22,108,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="___Без_имени__Копировать" Content="Height" HorizontalAlignment="Left" Margin="22,155,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="___Без_имени__Копировать1" Content="Static food count" HorizontalAlignment="Left" Margin="26,208,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="___Без_имени__Копировать2" Content="State delay, milliseconds" HorizontalAlignment="Left" Margin="20,270,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="___Без_имени__Копировать3" Content="New Game" HorizontalAlignment="Center" Margin="0,26,0,0" VerticalAlignment="Top"/>
+        <Label Content="Player name" HorizontalAlignment="Left" Margin="26,71,0,0" VerticalAlignment="Top"/>
+        <Label Content="Game name" HorizontalAlignment="Left" Margin="26,52,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="GameNameTextBox" HorizontalAlignment="Left" Margin="159,52,0,0" TextWrapping="Wrap" Text="My Game" VerticalAlignment="Top" Width="172"/>
+        <TextBox x:Name="PlayerNameTextBox" HorizontalAlignment="Left" Margin="157,75,0,0" TextWrapping="Wrap" Text="Ich Shlanger(shouldn't see)" VerticalAlignment="Top" Width="174"/>
+
+    </Grid>
+</Window>

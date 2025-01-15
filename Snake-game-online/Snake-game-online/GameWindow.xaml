@@ -1,0 +1,33 @@
+﻿<Window x:Class="SnakeGameOnline.GameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SnakeGameOnline"
+        mc:Ignorable="d"
+        Title="GameWindow" Height="484" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Canvas x:Name="FieldCanvas" Margin="4,6,216,15" RenderTransformOrigin="0.5,0.5">
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="-0.117"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="-0.598"/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+        </Canvas>
+        <ListView x:Name="Leaderboard" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,13,252" Height="180" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="196">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="Exit" Content="Exit" HorizontalAlignment="Right" Margin="0,0,80,80" Click="Exit_Click" Height="23" VerticalAlignment="Bottom" Width="59"/>
+
+    </Grid>
+</Window>
