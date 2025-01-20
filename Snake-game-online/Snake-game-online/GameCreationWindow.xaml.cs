@@ -1,7 +1,7 @@
-﻿using SnakeGameOnline.Model;
+﻿using Snake_game_online;
 using System.Windows;
 
-namespace SnakeGameOnline
+namespace SnakeOnline
 {
     /// <summary>
     /// Логика взаимодействия для GameCreationWindow.xaml

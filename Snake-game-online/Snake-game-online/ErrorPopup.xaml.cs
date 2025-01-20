@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace SnakeGameOnline
+namespace SnakeOnline
 {
     /// <summary>
     /// Логика взаимодействия для ErrorPopup.xaml

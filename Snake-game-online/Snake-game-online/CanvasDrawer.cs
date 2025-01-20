@@ -1,9 +1,9 @@
-﻿using Snake_game_online.model.Game.GameState;
+﻿using SnakeOnline.Game.States;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace SnakeGameOnline;
+namespace SnakeOnline;
 
 public partial class GameWindow
 {

@@ -1,10 +1,10 @@
-﻿using Snake_game_online.model.Game.GameState;
+﻿using Snake_game_online;
+using SnakeOnline.Game.States;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 
-namespace SnakeGameOnline
+namespace SnakeOnline
 {
     /// <summary>
     /// Логика взаимодействия для GameWindow.xaml
@@ -25,9 +25,8 @@ namespace SnakeGameOnline
             _presenter.GameStateUpdated += OnGameStateUpdate;
         }
         
-        private void OnGameStateUpdate(object sender, EventArgs eventArgs)
+        private void OnGameStateUpdate(IGameState state)
         {
-            IGameState state = ((Presenter.GameStateUpdatedEventArgs)eventArgs).GameState;
             Dispatcher.Invoke(() =>
             {
                 DisplayGameState(state);

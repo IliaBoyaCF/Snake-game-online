@@ -1,19 +1,20 @@
-﻿using Serilog;
-using Snake_game_online.model.Game.GameState;
-using SnakeGameOnline.Model;
-using SnakeGameOnline.Model.Network;
-using SnakeGameOnline.Model.Network.Node;
+﻿using Network;
+using Network.Node;
+using Serilog;
+using SnakeOnline;
+using SnakeOnline.Game.Core;
+using SnakeOnline.Game.States;
 using Snakes;
 using System.Diagnostics;
 using System.Net;
-using static SnakeGameOnline.MainWindow;
+using static SnakeOnline.MainWindow;
 
-namespace SnakeGameOnline;
+namespace Snake_game_online;
 
-public class Presenter
+public class Presenter : IPresenter
 {
 
-    public record OngoingGameInfo(string Name, List<IPlayerState> Players, 
+    public record OngoingGameInfo(string Name, List<IPlayerState> Players,
         IGameInfo.IGameConfig GameConfig, bool CanJoin, IPEndPoint SenderAddress, GameAnnouncement GameAnnouncement) : IOngoingGameInfo;
 
     public class GameStateUpdatedEventArgs : EventArgs // CR: To remove
@@ -26,8 +27,8 @@ public class Presenter
         }
     }
 
-    public delegate void OnGameStateUpdate(object sender, GameStateUpdatedEventArgs args); // CR: Change signature to OnGameStateUpdate(IGameState state);
-    
+    public delegate void OnGameStateUpdate(IGameState state); // CR: Change signature to OnGameStateUpdate(IGameState state);
+
     public event OnGameStateUpdate? GameStateUpdated;
 
     public delegate void OnGameListUpdate(List<IOngoingGameInfo> actualList);
@@ -35,7 +36,7 @@ public class Presenter
 
     public event OnGameListUpdate? GameListUpdated;
 
-    private Model.Game.Core.Game? ongoingGame;
+    private IGame? ongoingGame;
 
     private NodeContext? _nodeContext;
 
@@ -46,10 +47,10 @@ public class Presenter
     private readonly OngoingGamesList _ongoingGamesList;
     private MainWindow _mainWindow;
 
-    private IGameInfo.IGameConfig? _gameConfig; 
+    private IGameInfo.IGameConfig? _gameConfig;
 
     private Timer? _ongoingTimer;
-    
+
     private int MyPlayerId;
 
     public Presenter()
@@ -70,11 +71,11 @@ public class Presenter
         Log.Debug("Starting new game as MASTER.");
         _gameConfig = gameConfig;
         _ongoingGamesList.Stop();
-        ongoingGame = new Model.Game.Core.Game(gameConfig.GameName, gameConfig.StateDelay_ms, gameConfig.FieldWidth, 
+        ongoingGame = new SnakeOnline.Game.Core.Game(gameConfig.GameName, gameConfig.StateDelay_ms, gameConfig.FieldWidth,
             gameConfig.FieldHeight, gameConfig.FoodStatic);
         MyPlayerId = ongoingGame.NewPlayer(gameConfig.PlayerName);
         _nodeContext = new NodeContext(MyPlayerId, null, this, ongoingGame, _socketWrapper);
-        _nodeContext.GameStateUpdated += (o, args) => GameStateUpdated?.Invoke(o, args);
+        _nodeContext.GameStateUpdated += (args) => GameStateUpdated?.Invoke(args);
         Master master = Master.InitNew(_nodeContext);
         _nodeContext.CurrentState = master;
         Log.Debug("Successfully started new game as MASTER.");
@@ -114,7 +115,7 @@ public class Presenter
     public void ExitApplication()
     {
         _socketWrapper.Dispose();
-    } 
+    }
 
     internal void OnError(string errorMessage)
     {
@@ -138,7 +139,7 @@ public class Presenter
             new OngoingGamesList.GameConfig(gameAnnouncement.Config), gameAnnouncement.CanJoin, info.Item1, gameAnnouncement);
     }
 
-    internal void JoinGame(IOngoingGameInfo selectedGame, string playerName)
+    public void JoinGame(IOngoingGameInfo selectedGame, string playerName)
     {
         Log.Debug($"Trying to join to {((OngoingGameInfo)selectedGame).SenderAddress} as NORMAL");
         if (IsGameGoing())
@@ -149,11 +150,11 @@ public class Presenter
         OngoingGameInfo gameInfo = selectedGame as OngoingGameInfo;
         _gameConfig = gameInfo.GameConfig;
         _ongoingGamesList.Stop();
-        ongoingGame = new Model.Game.Core.Game(gameInfo.Name, _gameConfig.StateDelay_ms, _gameConfig.FieldWidth, _gameConfig.FieldHeight, _gameConfig.FoodStatic);
+        ongoingGame = new SnakeOnline.Game.Core.Game(gameInfo.Name, _gameConfig.StateDelay_ms, _gameConfig.FieldWidth, _gameConfig.FieldHeight, _gameConfig.FoodStatic);
         _nodeContext = new NodeContext(-1, null, this, ongoingGame, _socketWrapper);
-        _nodeContext.GameStateUpdated += (o, args) =>
+        _nodeContext.GameStateUpdated += (args) =>
         {
-            GameStateUpdated?.Invoke(o, args);
+            GameStateUpdated?.Invoke(args);
         };
         GamePlayer masterState = null;
         foreach (GamePlayer player in gameInfo.GameAnnouncement.Players.Players)
@@ -170,17 +171,22 @@ public class Presenter
         _nodeContext.CurrentState = connecting;
     }
 
-    internal void OnJoinError(GameMessage.Types.ErrorMsg error)
+    public void OnJoinError(GameMessage.Types.ErrorMsg error)
     {
         Log.Debug("Couldn't join the game.");
         _mainWindow.DisplayError(error.ErrorMessage);
         ExitGame();
     }
 
-    internal void OnJoinSuccess(int id)
+    public void OnJoinSuccess(int id)
     {
         Debug.Assert(_gameConfig != null);
         MyPlayerId = id;
-        _mainWindow.OnGameJoined(_gameConfig);   
+        _mainWindow.OnGameJoined(_gameConfig);
+    }
+
+    void IPresenter.OnError(string message)
+    {
+        throw new NotImplementedException();
     }
 }

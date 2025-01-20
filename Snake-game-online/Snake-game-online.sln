@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35209.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snake-game-online", "Snake-game-online\Snake-game-online.csproj", "{A4A16621-48C7-4B70-BBD3-6E1F37706FF3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "Snake-game-online\View.csproj", "{A4A16621-48C7-4B70-BBD3-6E1F37706FF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game", "Game\Game.csproj", "{27A0F879-09F4-4CB6-9B94-1C73770FA255}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Network", "View\Network.csproj", "{DCA10C4B-4C5C-4ED9-ABAC-3BB3BAD65FDB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{A4A16621-48C7-4B70-BBD3-6E1F37706FF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4A16621-48C7-4B70-BBD3-6E1F37706FF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4A16621-48C7-4B70-BBD3-6E1F37706FF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27A0F879-09F4-4CB6-9B94-1C73770FA255}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27A0F879-09F4-4CB6-9B94-1C73770FA255}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27A0F879-09F4-4CB6-9B94-1C73770FA255}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27A0F879-09F4-4CB6-9B94-1C73770FA255}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCA10C4B-4C5C-4ED9-ABAC-3BB3BAD65FDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCA10C4B-4C5C-4ED9-ABAC-3BB3BAD65FDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCA10C4B-4C5C-4ED9-ABAC-3BB3BAD65FDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCA10C4B-4C5C-4ED9-ABAC-3BB3BAD65FDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

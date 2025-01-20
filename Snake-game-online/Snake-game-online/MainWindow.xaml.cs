@@ -1,10 +1,10 @@
 ﻿using Serilog;
-using Snake_game_online.model.Game.GameState;
-using SnakeGameOnline.Model;
+using Snake_game_online;
+using SnakeOnline.Game.States;
 using System.ComponentModel;
 using System.Windows;
 
-namespace SnakeGameOnline
+namespace SnakeOnline
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
